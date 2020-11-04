@@ -60,11 +60,17 @@ function renderQuestion() {
         console.log(myQuestions.length);
         console.log(correct);
 
-        quiz.innerHTML = "<h2>You got "+correct+" of "+myQuestions.length+" questions correct</h2>";
+        // need to change this to import current time to here
+        quiz.innerHTML = "<h2>Your score is "+correct+" of "+myQuestions.length+" questions correct</h2>";
         get("quizStatus").innerHTML = "Test completed";
+
+        // need to add form to putin user name
 
         pos = 0;
         correct = 0;
+
+        // add button to play again
+        quiz.innerHTML += "<button onclick='renderQuestion()'>Play Again</button>";
 
         return false
     }
@@ -124,8 +130,14 @@ function checkAnswer() {
 // add evenlistener to show question when page load
 
 
+welcomeEl = get("welcome");
+console.log("welcomeEl= " + welcomeEl);
+buttonEl = get("start");
 
+buttonEl.addEventListener("click", function() {
+    welcomeEl.remove();
+    renderQuestion();
 
+});
 
-
-window.addEventListener("load", renderQuestion);
+// window.addEventListener("load", renderQuestion)
