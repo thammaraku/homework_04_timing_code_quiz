@@ -7,13 +7,13 @@
 </head>
 <body>
     
-    <header>
-        <h1>Welcome to JavaScript Challenge</h1>
-        <p>You have 60 seconds to answer five JavaScipt question. Points will be the time remaining when you complete all the question. Ten seconds will be deducted from the timer if your answer is wrong.</p>
-
-    <header>
-
     <div id="container">
+
+        <div id="welcome">
+            <h1>Welcome to JavaScript Challenge</h1>
+            <p>You have 60 seconds to answer five JavaScipt question. Points will be the time remaining when you complete all the question. Ten seconds will be deducted from the timer if your answer is wrong.</p>
+            <button id="start">Click to Start</button>
+        </div>
 
         <!-- this element will interact and show result -->
         <h2 id="quizStatus"></h2>
@@ -21,7 +21,19 @@
         <!-- this element will show quesion and choices -->
         <div id="quiz"></div>
 
- 
+        <nav>
+
+            <div id="timer">
+
+            </div>
+
+            <div id="scoreBoard">
+
+
+            </div>
+
+        </nav>
+
     </div>
 
     <script src="./script.js"></script>    
