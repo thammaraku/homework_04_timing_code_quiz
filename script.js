@@ -70,7 +70,7 @@ function renderQuestion() {
         correct = 0;
 
         // add button to play again
-        quiz.innerHTML += "<button onclick='renderQuestion()'>Play Again</button>";
+        quiz.innerHTML += "<button onclick='reStart()'>Play Again</button>";
 
         return false
     }
@@ -93,6 +93,10 @@ function renderQuestion() {
     quiz.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
 }
 
+function reStart() {
+    timeStart();
+    renderQuestion();
+}
 
 function checkAnswer() {
 
@@ -136,8 +140,40 @@ buttonEl = get("start");
 
 buttonEl.addEventListener("click", function() {
     welcomeEl.remove();
+    timeStart();
     renderQuestion();
 
 });
 
 // window.addEventListener("load", renderQuestion)
+
+
+var countDownEl = document.getElementById("countDown");
+var i = 0
+
+function timeStart() {
+
+    // game time 60 seconds
+    
+    var timeLeft = 5;
+    var timeInterval = setInterval(function() {
+
+        // show how much time remaining
+        countDownEl.textContent = timeLeft + " seconds remaining";
+        timeLeft--;
+
+        if(timeLeft === 0) {
+
+            // show time up when no time remaining
+            countDownEl.textContent = "Time Up!!";
+
+            // place holder when timeup show score
+            // gameOver();
+
+            // clearinterval is required otherwise timer will not stop
+            clearInterval(timeInterval);
+        }
+
+    }, 1000);
+    // countdown 1000 millisecond each
+}
