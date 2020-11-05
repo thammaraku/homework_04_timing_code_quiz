@@ -1,32 +1,29 @@
 label {
-    color: red;
     background-color: red;
-    font: red;
+    font: black;
     border: solid;
+    margin: 30px;
+}
 
+input[type="radio"] {
+    margin: 20px 10px 20px 10px;
+}
+
+nav {
+    border: solid;
+}
+
+main {
+    height: 700px;
+    border: solid;
+}
+#timer {    
+    color: red;
+    height: 200px;
 
 }
 
-.choices {
-    color: red;
-    background-color: red;
-    font: red;
+#scoreBoard {
     border: solid;
-
-}
-
-#list {
-    color: red;
-    background-color: red;
-    font: red;
-    border: solid;
-
-}
-
-.list {
-    color: red;
-    background-color: red;
-    font: red;
-    border: solid;
-
+    height: 500px;
 }
