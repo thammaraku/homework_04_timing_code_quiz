@@ -3,37 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP LINK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
     <title>JavaScript Quiz Challenge</title>
 </head>
 <body>
     
-    <main>
+    <main class="vh-100 d-flex align-items-center bg-dark">
 
-        <div id="welcome">
-            <h1>Welcome to JavaScript Challenge</h1>
-            <p>You have 60 seconds to answer five JavaScipt question. Points will be the time remaining when you complete all the question. Ten seconds will be deducted from the timer if your answer is wrong.</p>
-            <button id="start">Click to Start</button>
+        <!-- GRID ONE ROW TWO COLUMNS -->
+        <div class="row w-100">
+            <div class="col-9">
+                <div id="welcome">
+                    <h1>Welcome to JavaScript Challenge</h1>
+                    <p>You have 60 seconds to answer five JavaScipt question. Points will be the time remaining when you complete all the question. Ten seconds will be deducted from the timer if your answer is wrong.</p>
+                    <button id="start">Click to Start</button>
+                </div>
+
+                <!-- this element will interact and show result -->
+                <h2 id="quizStatus"></h2>
+
+                <!-- this element will show quesion and choices -->
+                <div id="quiz"></div>
+            </div>
+
+            <!-- GRID ONE COLUMN FOUR ROWS -->
+            <nav class="col-3"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h2 id="timerHeader">Time Left</h2>
+                            <h2 id="countDown"></h2>
+                        </div>
+                        <div>
+                            <h2 id="leadHeader">Leader Board</h2>
+                            <h2 id="leadBoard"></h2>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+  
+
         </div>
-
-        <!-- this element will interact and show result -->
-        <h2 id="quizStatus"></h2>
-
-        <!-- this element will show quesion and choices -->
-        <div id="quiz"></div>
+    
 
     </main>
 
-    <nav>
-        <div id="timer">
-            <h2 id="countDown"></h2>
-        </div>
-
-        <div id="scoreBoard">
-
-
-        </div>
-    </nav>
 
 
     <script src="./script.js"></script>    
