@@ -4,13 +4,12 @@
 // display question and choices
 // compare user pick with correct answer
 
-
 var pos = 0;
 var correct = 0;
 var choice = "";
 var choices = "";
 
-var quiz, quizStatus, question, choice, choices, chA, chB, chC;
+var quizEl, quizStatus, question, choice, choices, chA, chB, chC;
 
 // keep questions as objects in an array
 const myQuestions = [
@@ -43,60 +42,51 @@ function get(x) {
     return document.getElementById(x);
 }
 
+// fucntion to start
+// add evenlistener to show question when press start
+// window.addEventListener("load", renderQuestion)
+
+welcomeEl = get("welcome");
+buttonEl = get("start");
+
+buttonEl.addEventListener("click", function() {
+    welcomeEl.remove();
+    timeStart();
+    renderQuestion();
+    // reStart();
+});
+
+
 function renderQuestion() {
 
     // show question and choices on the page
-    quiz = get("quiz");
-
-    console.log("quiz= " + quiz);
-    console.log("pos= " + pos);
-    console.log("myQuestions.length= " + myQuestions.length);
-    console.log("correct= " + correct);
+    quizEl = get("quiz");
+    quizStatusEl = get("quizStatus");
 
     // test completed when current postion more then question array
-    if(pos >= myQuestions.length) {
+    if(pos < myQuestions.length) {
 
-        console.log(pos);
-        console.log(myQuestions.length);
-        console.log(correct);
+        // display question
+        quizStatusEl.innerHTML = "Question " + (pos+1) + " of " + myQuestions.length;
 
-        // need to change this to import current time to here
-        quiz.innerHTML = "<h2>Your score is "+correct+" of "+myQuestions.length+" questions correct</h2>";
-        get("quizStatus").innerHTML = "Test completed";
+        question = myQuestions[pos].question;
+        chA = myQuestions[pos].a;
+        chB = myQuestions[pos].b;
+        chC = myQuestions[pos].c;
 
-        // need to add form to putin user name
+        // dispay choices
+        quizEl.innerHTML = "<h3>" + question + "</h3>";
+        // showing choices using addition assignment operation mean quizEl.innerHTML= quizEl.innerHTML + radio + chA
+        // radio button must have the same name which allow only one to select
+        quizEl.innerHTML += "<label> <input type='radio' name='choices' value='a'> "+chA+"</label><br>";
+        quizEl.innerHTML += "<label> <input type='radio' name='choices' value='b'> "+chB+"</label><br>";
+        quizEl.innerHTML += "<label> <input type='radio' name='choices' value='c'> "+chC+"</label><br><br>";
+        quizEl.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
 
-        pos = 0;
-        correct = 0;
-
-        // add button to play again
-        quiz.innerHTML += "<button onclick='reStart()'>Play Again</button>";
-
-        return false
     }
 
-    // display question
-    get ("quizStatus").innerHTML = "Question " + (pos+1) + " of " + myQuestions.length;
-
-    question = myQuestions[pos].question;
-    chA = myQuestions[pos].a;
-    chB = myQuestions[pos].b;
-    chC = myQuestions[pos].c;
-
-    // dispay choices
-    quiz.innerHTML = "<h3>" + question + "</h3>";
-    // showing choices using addition assignment operation mean quiz.innerHTML= quiz.innerHTML + radio + chA
-    // radio button must have the same name which allow only one to select
-    quiz.innerHTML += "<label> <input type='radio' name='choices' value='a'> "+chA+"</label><br>";
-    quiz.innerHTML += "<label> <input type='radio' name='choices' value='b'> "+chB+"</label><br>";
-    quiz.innerHTML += "<label> <input type='radio' name='choices' value='c'> "+chC+"</label><br><br>";
-    quiz.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
 }
 
-function reStart() {
-    timeStart();
-    renderQuestion();
-}
 
 function checkAnswer() {
 
@@ -131,49 +121,88 @@ function checkAnswer() {
     renderQuestion();
 }
 
-// add evenlistener to show question when page load
-
-
-welcomeEl = get("welcome");
-console.log("welcomeEl= " + welcomeEl);
-buttonEl = get("start");
-
-buttonEl.addEventListener("click", function() {
-    welcomeEl.remove();
-    timeStart();
-    renderQuestion();
-
-});
-
-// window.addEventListener("load", renderQuestion)
-
-
+var userInputEl = document.getElementById("userInput");
 var countDownEl = document.getElementById("countDown");
 var i = 0
 
 function timeStart() {
-
     // game time 60 seconds
-    
     var timeLeft = 5;
     var timeInterval = setInterval(function() {
 
         // show how much time remaining
-        countDownEl.textContent = timeLeft + " seconds remaining";
+        countDownEl.textContent = timeLeft;
         timeLeft--;
 
-        if(timeLeft === 0) {
-
+        if((timeLeft === 0) || (pos >= myQuestions.length)) {
             // show time up when no time remaining
-            countDownEl.textContent = "Time Up!!";
+            if (timeLeft === 0) {
+                quizEl.textContent = "Time Up!!" + "Your score is " + timeLeft;
+                countDownEl.textContent = "Time Up!!";
+            } else if (pos >= myQuestions.length) {
+                quizEl.textContent = "All question answered!!" + "Your score is " + timeLeft;
+            }
+
+            // record score
+            quizStatusEl.innerHTML = "Put in your name";
+            quizEl.innerHTML = "<label> <input type='text' name='username' id='name' placeholder='put in your name'> <input type='submit' id='submit' value='submit'>";
 
             // place holder when timeup show score
             // gameOver();
 
             // clearinterval is required otherwise timer will not stop
             clearInterval(timeInterval);
+            // add button to play again
+            // userInputEl.innerHTML += "<button onclick='reStart()'>Play Again</button>";
         }
 
     }, 1000);
     // countdown 1000 millisecond each
+}
+
+
+
+// function reStart() {
+//     timeStart();
+//     renderQuestion();
+// }
+
+var submitButton = get("quiz");
+console.log(submitButton);
+var leadBord = get("leadBoard");
+console.log(leadBord);
+quizEl = get("quiz");
+
+
+// quizEl.addEventListener("click", function(event) {
+//     event.preventDefault();
+  
+//     if(event.target.matches("submit")) {
+//         var name = document.querySelector("#name").value;
+//         if (name === "") {
+//         displayMessage("error", "Name cannot be blank");
+//         } else {
+//         displayMessage("success", "Registered successfully");
+    
+//         localStorage.setItem("name", name);
+//         renderLastRegistered();
+//         }
+    
+//     };
+// });
+
+var name = "thamma"
+
+        localStorage.setItem("name", name);
+        renderLastRegistered();
+
+
+function renderLastRegistered() {
+    var name = localStorage.getItem("name");
+  
+    if (!name) {
+      return;
+    }
+  
+    leadBoard.textContent = name;
 }
