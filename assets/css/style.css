@@ -11,19 +11,41 @@ input[type="radio"] {
 
 nav {
     border: solid;
+    height: 700px;
+
 }
 
 main {
     height: 700px;
     border: solid;
 }
-#timer {    
-    color: red;
+#countDown {    
+    background-color: red;
     height: 200px;
+    font-size: 70px;
+    text-align: center;
 
 }
 
-#scoreBoard {
+#leadBoard {
     border: solid;
-    height: 500px;
+    height: 400px;
+    background-color: yellow;
+
+
+}
+
+#welcome {
+    border: solid;
+}
+
+#timerHeader {
+    background-color: lightcoral;
+    text-align: center;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+#leadHeader {
+    background-color: yellow;
 }
