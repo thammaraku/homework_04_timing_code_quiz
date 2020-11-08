@@ -1,51 +1,122 @@
-label {
-    background-color: red;
-    font: black;
+/* main {
+    height: 700px;
     border: solid;
-    margin: 30px;
+} */
+
+h1 {
+    font-size: 4rem;
+}
+
+#welcome {
+    padding: 50px;
+}
+body h3 {
+    color: yellow;
+    font-size: 3rem;
+    /* padding: 100px; */
+}
+
+#quizStatus {
+    padding: 50px;
+
+}
+
+#userInter {
+    color: yellow;
+    font-size: 3rem;
+    /* border: solid; */
+    padding: 10px;
+
+}
+
+#start {
+    font-size: 2rem;
+}
+
+#start:hover {
+    opacity: 80%;
+}
+
+li {
+    font-size: 2rem;
+}
+
+label {
+    /* background-color: red; */
+    font: white;
+    /* border: solid; */
+    margin: 20px;
+    color: white;
+
 }
 
 input[type="radio"] {
     margin: 20px 10px 20px 10px;
 }
 
+label:hover {
+    opacity: 80%;
+}
+
 nav {
-    border: solid;
+    /* border: solid; */
     height: 700px;
 
 }
 
-main {
-    height: 700px;
-    border: solid;
+#initial {
+    width: 350px;
+    height: 50px;
 }
+
+#submit {
+    height: 50px;
+}
+
+#form {
+    padding: 10px;
+}
+
+#replay {
+    padding: 10px;
+}
+
 #countDown {    
-    background-color: red;
-    height: 200px;
+    /* background-color: orange; */
+    height: 80%;
     font-size: 70px;
     text-align: center;
+    /* border: solid; */
+    padding-top: 200px;
 
 }
 
 #leadBoard {
-    border: solid;
-    height: 400px;
-    background-color: yellow;
+    /* border: solid; */
+    height: 80%;
+    font-size: 70px;
+    /* background-color: yellow; */
+    text-align: center;
+
+    
 
 
 }
 
 #welcome {
-    border: solid;
+    /* border: solid; */
 }
 
 #timerHeader {
-    background-color: lightcoral;
+    /* background-color: orange; */
     text-align: center;
     font-weight: bolder;
     padding: 5px;
 }
 
 #leadHeader {
-    background-color: yellow;
+    /* background-color: yellow; */
+    text-align: center;
+    font-weight: bolder;
+    padding: 5px;
 }
