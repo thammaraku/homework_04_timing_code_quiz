@@ -128,3 +128,7 @@ nav {
     font-weight: bolder;
     padding: 5px;
 }
+
+ul {
+    list-style: none;
+}
