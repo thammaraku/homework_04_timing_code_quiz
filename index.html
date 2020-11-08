@@ -14,13 +14,22 @@
     <!-- <main class="vh-100 d-flex align-items-center bg-dark"> -->
     <main>
 
-
         <!-- GRID ONE ROW TWO COLUMNS -->
         <div class="row w-100">
-            <div class="col-9">
-                <div id="welcome">
-                    <h1>Welcome to JavaScript Challenge</h1>
-                    <p>You have 60 seconds to answer five JavaScipt question. Points will be the time remaining when you complete all the question. Ten seconds will be deducted from the timer if your answer is wrong.</p>
+            <div class="vh-100 col-9 d-flex flex-column align-items-center bg-dark justify-content-center">
+                <div id="welcome" class="text-center text-white">
+                    <h1 class="text-center text-white" >Welcome to JavaScript Challenge</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <ul class="text-left">
+                        <li>60 seconds to answer five JavaScipt questions</li> 
+                        <li>Points will be the time remaining when you complete all the question</li>
+                        <li>Ten seconds will be dedcuted from the timer if your answer is wrong</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <br>
                     <button id="start">Click to Start</button>
                 </div>
 
@@ -28,19 +37,25 @@
                 <h2 id="quizStatus"></h2>
 
                 <!-- this element will show quesion and choices -->
-                <div id="quiz">
+                <div id="userInter">
+                    <p></p>
                 </div>
+
+                <div id="form"></div>
+                <div id="replay"></div>
+
+
             </div>
 
             <!-- GRID ONE COLUMN FOUR ROWS -->
-            <nav class="col-3"> 
+            <nav class="vh-100 col-3 "> 
                 <div class="row">
-                    <div class="col-12">
-                        <div>
+                    <div class="vh-100 col-12 align-items-center bg-secondary justify-content-center">
+                        <div class="h-50 bg-danger">
                             <h2 id="timerHeader">Time Left</h2>
                             <h2 id="countDown"></h2>
                         </div>
-                        <div>
+                        <div class="h-50 bg-success">
                             <h2 id="leadHeader">Leader Board</h2>
                             <h2 id="leadBoard"></h2>
                         </div>
