@@ -1,27 +1,20 @@
-
-// functions needed
-// dom target element
-// display question and choices
-// compare user pick with correct answer
-
 var pos = 0;
 var correct = 0;
-var choice = "";
-// var choices = "";
-
-// var quizEl, quizStatus, question, choice, choices, chA, chB, chC, pForm;
-
+var choice = 0;
 welcomeEl = document.getElementById("welcome");
 buttonEl = document.getElementById("start");
 userInterEl = document.getElementById("userInter");
 quizStatusEl = document.getElementById("quizStatus");
 replayEl = document.getElementById("replay");
 formEl = document.getElementById("form");
+scoreBoardEl = document.getElementById("scoreBoard");
+resultEl = document.getElementById("result");
 choices = document.getElementsByName("choices");
 userInputEl = document.getElementById("userInput");
 countDownEl = document.getElementById("countDown");
-// var i = 0
 var timeLeft = 60;
+// var name = localStorage.getItem("name");
+// var score = localStorage.getItem("score");
 
 
 // keep questions as objects in an array
@@ -79,15 +72,21 @@ buttonEl.addEventListener("click", function () {
 });
 
 function reStart() {
-    timeLeft = 2;
+
+    timeLeft = 60;
     pos = 0;
+    quizStatusEl.innerHTML ="";
+    userInterEl.innerHTML ="";    
+    formEl.innerHTML ="";
+    replayEl.innerHTML = "";
+
+
     renderQuestion();
     timeStart();
 
 }
 
 function renderQuestion() {
-
 
     if (pos < myQuestions.length) {
 
@@ -111,15 +110,10 @@ function renderQuestion() {
         quizStatusEl.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
     }
 
-    console.log("timeLeft under renderQuestion is " + timeLeft)
-
-    return timeLeft;
-
 }
 
 
 function checkAnswer() {
-
     
     for (var i = 0; i < choices.length; i++) {
         if (choices[i].checked) {
@@ -136,12 +130,25 @@ function checkAnswer() {
     if (choice == myQuestions[pos].answer) {
         // increase user score.
         correct++;
-        userInterEl.textContent = "That's Correct!!";
+        resultEl.textContent = "That's Correct!!";
+        setTimeout(function () {
+            resultEl.textContent ="";
+        }, 500);
+        // removeString();
+
+        // clearInterval();
+
 
     } else {
         // place holder to add reduce timer if wrong
         // correct--;
-        userInterEl.textContent = "Wrong Answer!!!";
+        resultEl.textContent = "Wrong Answer!!!";
+        setTimeout(function () {
+            resultEl.textContent ="";
+        }, 500);
+        // removeString();
+        // clearInterval();
+
 
         timeLeft -= 10;
         if (timeLeft < 0) {
@@ -157,12 +164,20 @@ function checkAnswer() {
     } else {
         // increase position to next question
         pos++;
-        renderQuestion();
+        // setInterval(function () {
+        //     renderQuestion();
+        // }, 1000);
+        // clearInterval();
+
+        setTimeout(function () {
+            renderQuestion();
+        }, 500);
+
+        // renderQuestion();
     }
 
     // console.log("timeLeft under checkAnswer is " + timeLeft)
 
-    return timeLeft;
 
 
 }
@@ -191,41 +206,51 @@ function addInitial() {
    replayEl.appendChild(replayButton);
    replayButton.setAttribute("onclick", "reStart();");
 
+   var clearScoreButton = document.createElement("input");
+   clearScoreButton.setAttribute("type", "submit");
+   clearScoreButton.setAttribute("value", "Clear Score");
+   replayEl.appendChild(clearScoreButton);
+   clearScoreButton.setAttribute("onclick", "clearScore();");
+
+
     formEl.addEventListener("click", function(event) {
         event.preventDefault();
         
         console.log("event target is " + event.target.value);
 
         if (event.target.value == ("Submit")) {
-            
+
             var name = document.querySelector("#initial").value;
+
+            console.log("name after submit " + name);
             var score = timeLeft;
 
-            console.log(name);
-            console.log(score);
+            // console.log(name);
+            // console.log(score);
 
 
             if (!name) {
-                alert("error Name cannot be blank");
-            } else {
-                alert("Registered successfully");
-
+                // alert("error Name cannot be blank");
+                var name = "noname";
+            }
                 localStorage.setItem("name", name);
                 localStorage.setItem("score", score);
-                renderLastRegistered();
-            }
+
+                var initialEl = document.createElement("li");
+                initialEl.textContent = name +" : "+ score;
+                scoreBoardEl.appendChild(initialEl);
+                // scoreBoard.append(name +" : "+ score);
+
+                // renderLastRegistered()
+
+                event.target.value="";
         }
-
-
     });
 
-
+    
 }
 
 function timeStart() {
-
-    renderQuestion();
-    
 
     var timeInterval = setInterval(function () {
 
@@ -235,40 +260,45 @@ function timeStart() {
 
             // show time up when no time remaining
             if ((timeLeft === 0) || (timeLeft < 0)) {
-                // var timeLeft = 0;
                 quizStatusEl.innerHTML ="";
                 console.log("timeLeft under timeStart " + timeLeft);
 
                 userInterEl.textContent = "Time Up!!" + "Your score is " + timeLeft;
                 countDownEl.textContent = "Time Up!!";
-                var pForm = document.createElement("div");
-                formEl.appendChild(pForm);
                 clearInterval(timeInterval);
                 addInitial();
 
             } else if (pos >= myQuestions.length) {
                 quizStatusEl.innerHTML ="";
-                userInterEl.textContent = "All question answered. Your score is " + timeLeft;
-                var pForm = document.createElement("div");
+                userInterEl.textContent = "All questions are answered. Your score is " + timeLeft;
                 countDownEl.textContent = "Done!!";
-                formEl.appendChild(pForm);
                 clearInterval(timeInterval);
                 addInitial();
             }
-        
             
-
     }, 1000);
+
+    renderQuestion();
+
     
 }
 
 function renderLastRegistered() {
+
     var name = localStorage.getItem("name");
     var score = localStorage.getItem("score");
 
-    if (!name) {
-        return;
-    }
-    // leadBoard.textContent = name;
-    leadBoard.append(name +" - "+ score);
+    // scoreBoard.textContent = name +" : "+ score;
+
+    scoreBoard.append(name +" : "+ score);
+
+
+    // if (!name) {
+    //     return;
+    // }
+}
+
+
+function clearScore() {
+    scoreBoard.textContent ="";
 }
