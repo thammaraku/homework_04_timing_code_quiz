@@ -13,8 +13,6 @@ choices = document.getElementsByName("choices");
 userInputEl = document.getElementById("userInput");
 countDownEl = document.getElementById("countDown");
 var timeLeft = 60;
-// var name = localStorage.getItem("name");
-// var score = localStorage.getItem("score");
 
 
 // keep questions as objects in an array
@@ -68,7 +66,6 @@ function get(x) {
 buttonEl.addEventListener("click", function () {
     welcomeEl.remove();
     timeStart();
-    // renderQuestion();
 });
 
 function reStart() {
@@ -89,8 +86,6 @@ function reStart() {
 function renderQuestion() {
 
     if (pos < myQuestions.length) {
-
-        // userInterEl.textContent = "";
 
         // display question
         quizStatusEl.innerHTML = "Question " + (pos + 1) + " of " + myQuestions.length;
@@ -134,21 +129,13 @@ function checkAnswer() {
         setTimeout(function () {
             resultEl.textContent ="";
         }, 500);
-        // removeString();
-
-        // clearInterval();
-
 
     } else {
-        // place holder to add reduce timer if wrong
-        // correct--;
+
         resultEl.textContent = "Wrong Answer!!!";
         setTimeout(function () {
             resultEl.textContent ="";
         }, 500);
-        // removeString();
-        // clearInterval();
-
 
         timeLeft -= 10;
         if (timeLeft < 0) {
@@ -164,21 +151,11 @@ function checkAnswer() {
     } else {
         // increase position to next question
         pos++;
-        // setInterval(function () {
-        //     renderQuestion();
-        // }, 1000);
-        // clearInterval();
-
         setTimeout(function () {
             renderQuestion();
         }, 500);
 
-        // renderQuestion();
     }
-
-    // console.log("timeLeft under checkAnswer is " + timeLeft)
-
-
 
 }
 
@@ -225,12 +202,7 @@ function addInitial() {
             console.log("name after submit " + name);
             var score = timeLeft;
 
-            // console.log(name);
-            // console.log(score);
-
-
             if (!name) {
-                // alert("error Name cannot be blank");
                 var name = "noname";
             }
                 localStorage.setItem("name", name);
@@ -239,10 +211,6 @@ function addInitial() {
                 var initialEl = document.createElement("li");
                 initialEl.textContent = name +" : "+ score;
                 scoreBoardEl.appendChild(initialEl);
-                // scoreBoard.append(name +" : "+ score);
-
-                // renderLastRegistered()
-
                 event.target.value="";
         }
     });
@@ -287,15 +255,8 @@ function renderLastRegistered() {
 
     var name = localStorage.getItem("name");
     var score = localStorage.getItem("score");
-
-    // scoreBoard.textContent = name +" : "+ score;
-
     scoreBoard.append(name +" : "+ score);
 
-
-    // if (!name) {
-    //     return;
-    // }
 }
 
 
